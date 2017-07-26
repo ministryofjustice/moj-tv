@@ -9,7 +9,7 @@
 ### How do I get set up? ###
 
 ### Build a Pi ###
-This should be installed on a Rasberry Pi 2 or 3, this is untested with Pi Zero but in theory should work.
+This should be installed on a Rasberry Pi 2 or 3, this is untested with Pi Zero but in theory should work.  
 Recommended SD card size - 8GB minimum.
 
 ### Install OS ###
@@ -22,15 +22,17 @@ https://www.raspberrypi.org/downloads/
 These scripts are designed to configure the Pi to start up and run the RiseVision software and display the signage.
 It does various things such as hide the mouse pointer, set the background image, start up a wifi checker script etc.
 
-To install:
+To install:  
 Download this repository to the user home directory (usually the pi users).
 
-Run build.sh - 
+If you wish to use the email functionality amend the build script accordingly
+
+Run build.sh -  
 sudo ./install/build.sh install username PiID [noupdate]
 
-username - normal system user, eg pi
-PiID - the name of the pi, eg Pi_45
-noupdate - skip OS update and upgrades (use if done already)
+username - normal system user, eg pi  
+PiID - the name of the pi, eg Pi_45  
+noupdate - skip OS update and upgrades (use if done already)  
 
 If install fails view log for errors then run build.sh uninstall to clean up and remove files.
 
@@ -41,8 +43,8 @@ Win32DiskImager and clone the SD card to other Pis
 Rise Vision is a freemium cloud digital signage provider.  Once the build is complete when you restart the Pi it will
 prompt you for your RiseVision Display ID.
 
-To configure RiseVision - 
-Go to https://www.risevision.com and sign up with a gmail account.
+To configure RiseVision -   
+Go to https://www.risevision.com and sign up with a gmail account.  
 Follow RiseVision guidance on how to set up Presentations, Schedules and Displays.
 
 To avoid charges uploading content, you can host your content remotely and display via url.  To do this with slides
@@ -53,4 +55,4 @@ you can embed Google slides into placeholders.
 * Developer - david.elliott@justice.gov.uk
 * Business Analyst gregory.cole@justice.gov.uk
 
-For more version config and version information see MOJ_PI_README
+For more config and version information see MOJ_PI_README
