@@ -227,7 +227,7 @@ echo "Successful" 2>&1 | tee -a $tvlog
 
 #copy files to file location
 echo "Copying files to ${moj_tv_files}" 2>&1 | tee -a $tvlog
-sudo -u ${piuser} cp -r /home/${piuser}/moj_tv/* ${moj_tv_files} || error_exit "Line $LINENO: Unable to copy files to ${moj_tv_files}" 
+sudo -u ${piuser} cp -r /home/${piuser}/moj-tv/* ${moj_tv_files} || error_exit "Line $LINENO: Unable to copy files to ${moj_tv_files}" 
 echo "Successful"
 
 #diable screen timeouts
