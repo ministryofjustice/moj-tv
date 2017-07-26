@@ -1,0 +1,19 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+# cargo-culted from Raspbian 2015-01
+
+auto lo
+iface lo inet loopback
+
+allow-hotplug eth0
+iface eth0 inet dhcp
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+
+#ensure powermangement is turned off
+post-up iwconfig wlan0 power off
+
+# Include files from /etc/network/interfaces.d:
+source-directory /etc/network/interfaces.d

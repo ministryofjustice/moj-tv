@@ -1,0 +1,70 @@
+#Based on Risevision set up here:
+#https://docs.google.com/document/d/1b_mRxKJbfcHSZxi3eIhOomTLamyMiD-kHvu4N90_iLc/edit#
+#and chromium install here
+#https://www.raspberrypi.org/forums/viewtopic.php?t=121195
+
+#update system
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+#install chromium and rpi-youtube
+wget -qO - http://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
+echo "deb http://dl.bintray.com/kusti8/chromium-rpi jessie main" | sudo tee -a /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get install youtube-dl -y #(if not next line will prompt for it)
+sudo apt-get install chromium-browser rpi-youtube -y
+
+#install unclutter to hide mouse
+sudo apt-get install unclutter -y
+
+#configure sound and disable overscan  -this broke it don't do!!
+sudo leafpad /boot/config.txt
+Un-comment "hdmi_drive=2"
+disable_overscan=1  #may not need this
+
+#install risevision app from:
+https://chrome.google.com/webstore/detail/rise-player/mfpgpdablffhbfofnhlpgmokokbahooi
+
+#create autostart
+mkdir ~/.config/autostart
+cp ~/.local/share/applications/chrome-*.desktop ~/.config/autostart/
+
+#disable screen timeout method 1 (try first)
+add the following to /etc/X11/xinit/xinitrc after the first line
+
+xset s off         # don't activate screensaver
+xset -dpms         # disable DPMS (Energy Star) features.
+xset s noblank     # don't blank the video device
+
+#disable screen timeout 2
+leafpad /home/linaro/disable_screen_timeout.sh
+
+#!/bin/sh
+xset s off
+xset s noblank
+xset -dpms
+
+chmod +x /home/pi/moj_tv/trunk/disable_screen_timeout.sh
+sudo leafpad /usr/share/applications/disable_screen_timeout.desktop
+
+[Desktop Entry]
+Name=Disable Screen Timeout
+Exec=/home/linaro/disable_screen_timeout.sh
+Type=Application
+Terminal=false
+
+cp /usr/share/applications/disable_screen_timeout.desktop /home/linaro/.config/autostart
+
+#time out disable 3
+/etc/xdg/lxsession/LXDE/autostart
+#@xscreensaver -no-splash
+@xset s off
+@xset -dpms
+@xset s noblank
+
+#install subversion and checkout code
+sudo apt-get install subversion -y
+svn checkout https://svn.riouxsvn.com/laa_tv/ #accept p
+svn checkout https://svn.riouxsvn.com/laa_tv/ --non-interactive
+
+

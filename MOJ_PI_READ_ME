@@ -1,0 +1,99 @@
+
+*************************************************
+This PI is property of MOJ
+
+DO NOT amend, adjust or delete any of the settings.
+
+Please get the permission before using this Pi for
+anything other than approved digital signage.
+
+*************************************************
+
+
+*************************************************
+
+MOJ Pi build version:
+v1-8
+New build and customised for generic MOJ TV
+
+*************************************************
+
+Setting up new Pi
+~~~~~~~~~~~~~~~~~
+Initial build:
+run moj_tv/install/build.sh as sudo
+Reboot
+
+1. Alt + F4 to close slides
+2. Coinfigure wifi if not preset:
+	- Start menu -> Internet -> wpa_gui
+	- Manage Networks - remove unwanted networks if not needed
+	- Current status - scan - select required network and input details
+	- Connect to network
+3. (If not configured already) Enter RiseVision Client ID
+	- Launch RiseVision if not already running
+	- Enter Client ID
+
+Important file locations
+~~~~~~~~~~~~~~~~~~~~~~~~~
+MOJ TV files folder:
+/home/pi/moj_tv_files
+
+Networking
+Wifi setup
+/etc/wpa_supplicant/wpa_supplicant.conf
+
+Network interfaces config
+/etc/network/interfaces
+
+Boot config file:
+/boot/config.txt
+
+Pi ID file
+/moj_tv_files/pi-id.txt
+
+To install VNC x11vnc
+Install weaved VNC option 4 - custom port 5900
+sudo apt-get install x11vnc
+x11vnc -storepasswd
+To start VNC server
+x11vnc -auth guess -forever -loop -noxdamage -repeat -rfbauth /home/linaro/.vnc/passwd -rfbport 5900 -shared
+x11vnc -xauth /var/lib/gdb/:0.Xauth -display :0
+
+****************************************************
+
+Version history
+~~~~~~~~~~~~~~~
+1-1 - Initial Version
+1-2 - Script to check wifi and restart network if not present
+    - Addition of RiseVision client configuration link
+1-3 - New wifi check file to reboot after 60min if still no connection, plus check for wired connection
+    - Weaved (remote) added to build.  Auto registers.
+1-4 - Added file copy script and update script. Crontab to restart at 3am, desktop backgroud added
+1-5 - Added SVN checkout and changed update method
+    - Moved files from desktop to file folder
+    - hdmi signal boost 4 (only on new builds)
+    - wifi log removed and wifi script output goes to LAATV.log
+    - new crontab file for new wifi-script location
+    - LAATV.log added to logrotate
+    - renamed desktop icon and new image
+    - timezone changed to bst
+1-6 - Added auto checkout.sh script
+    - Added auto sched-update.sh script
+    - Added user cron and amended root cron to run above
+    - Added autostart-url.sh to enable quick switching of startup
+    - Added version.txt to control when updates go out
+1-7 - Added error handling to install script
+    - Install youtube downloader
+    - Install omxplayer
+    - Added video-launch.sh omxplayer launcher script
+    - Added videodownloader.sh youtube downloader script
+    - Added launch-rise.sh and launch-slides.sh scripts
+    - Install ssmtp
+    - Install mailutils
+    - Added id-update.sh
+    - New root and user crontabs
+    - New build allows updates every 00,30 min to Pis on a pi-list.txt file in the install folder.
+1.8 - Removed all but basic install and Rise Vison files for generic MOJ Build
+
+
